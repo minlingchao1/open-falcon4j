@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>open-falcon4j</groupId>
+    <artifactId>com.minlingchao.falcon</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>open-falcon4j-common</module>
+        <module>open-falcon4j-transfer</module>
+        <module>open-falcon4j-judge</module>
+        <module>open-falcon4j-sender</module>
+        <module>open-falcon4j-alarm</module>
+        <module>open-falcon4j-web</module>
+        <module>open-falcon4j-agent</module>
+    </modules>
+
+    <properties>
+        <!--log-->
+        <version.slf4j.log4j12>1.7.21</version.slf4j.log4j12>
+
+        <!--lombok-->
+        <version.lombok>1.16.14</version.lombok>
+
+        <!--dubbo-->
+        <version.dubbo>2.8.4</version.dubbo>
+
+        <!--spring-->
+        <version.spring>4.3.3.RELEASE</version.spring>
+
+        <!--servlet-->
+        <version.servlet.api>3.1.0</version.servlet.api>
+        <version.servlet.jsp>2.2</version.servlet.jsp>
+        <version.servlet.jstl>1.2</version.servlet.jstl>
+
+        <!--plugins-->
+        <version.plugin.tomcat7.maven>2.2</version.plugin.tomcat7.maven>
+        <version.plugin.maven.compiler>3.5.1</version.plugin.maven.compiler>
+        <version.plugin.maven.war>2.6</version.plugin.maven.war>
+
+        <version.zkclient>0.9</version.zkclient>
+        <version.zookeeper>3.4.6</version.zookeeper>
+
+        <version.resteasy>3.0.7.Final</version.resteasy>
+        <version.resteasy>3.0.7.Final</version.resteasy>
+        <version.javax.validation>1.0.0.GA</version.javax.validation>
+        <version.tomcat.ember>8.0.11</version.tomcat.ember>
+
+
+    </properties>
+
+
+
+
+</project>
