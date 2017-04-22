@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <bean id="judgeConfig" class="com.lingchaomin.falcon.transfer.constant.TransferConfig">
+    <bean id="transferConfig" class="com.lingchaomin.falcon.transfer.constant.TransferConfig">
         <property name="batch" value="${falcon.transfer.judge.batch}"/>
         <property name="cluster" value="${falcon.transfer.judge.cluster}"/>
         <property name="enable" value="${falcon.transfer.judge.enable}"/>

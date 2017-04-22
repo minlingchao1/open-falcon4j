@@ -1,5 +1,6 @@
 package com.lingchaomin.falcon.transfer.receiver;
 
+import com.lingchaomin.falcon.common.entity.MetricValue;
 import com.lingchaomin.falcon.transfer.dto.TransferResp;
 
 /**
@@ -13,6 +14,6 @@ public interface IMetricInfoReceiver {
     /**
      * 接收监控信息
      */
-    TransferResp receiverMetricValues(String msg);
+    TransferResp receiverMetricValues(MetricValue metricValue);
 
 }

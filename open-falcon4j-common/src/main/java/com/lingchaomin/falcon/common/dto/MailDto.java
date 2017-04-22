@@ -29,7 +29,7 @@ public class MailDto  implements Serializable{
      * 发送邮箱
      */
     @ListColumn
-    private String tos;
+    private String to;
 
     /**
      *

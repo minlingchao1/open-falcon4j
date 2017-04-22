@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>open-falcon4j</groupId>
-    <artifactId>com.minlingchao.falcon</artifactId>
+    <artifactId>open-falcon</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -63,6 +63,8 @@
         <version.aspect>1.7.4</version.aspect>
 
         <version.spring.data.redis>1.7.2.RELEASE</version.spring.data.redis>
+
+        <version.commons.httpclient>3.1</version.commons.httpclient>
     </properties>
 
 

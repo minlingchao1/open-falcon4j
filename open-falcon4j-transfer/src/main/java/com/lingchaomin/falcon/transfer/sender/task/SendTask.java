@@ -28,7 +28,7 @@ public class SendTask {
     private static final Logger LOG=LoggerFactory.getLogger(SendTask.class);
 
     @Autowired
-    private TransferConfig judgeConfig;
+    private TransferConfig transferConfig;
 
     @Autowired
     private IJudgeItemDubboApi judgeItemService;
@@ -38,7 +38,7 @@ public class SendTask {
      */
     public void send2Judge(){
 
-        String clusters=judgeConfig.getCluster();
+        String clusters= transferConfig.getCluster();
 
         if(StringUtils.isBlank(clusters)){
             LOG.warn("judge clusters is null~~~~");
@@ -68,7 +68,7 @@ public class SendTask {
     private void forward2JudgeTask(ConcurrentLinkedQueue<JudgeItem> judgeItemQueue,String ip){
 
         //每批最大发送量
-        int batch=judgeConfig.getBatch();
+        int batch= transferConfig.getBatch();
 
         List<JudgeItem> judgeItems=new ArrayList<>();
 

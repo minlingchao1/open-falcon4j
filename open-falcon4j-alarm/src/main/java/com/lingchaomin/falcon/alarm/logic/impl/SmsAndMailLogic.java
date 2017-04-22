@@ -55,7 +55,7 @@ public class SmsAndMailLogic implements ISmsAndMailLogic {
 
         SmsDto sms = SmsDto.builder()
                 .content(content)
-                .tos(phones)
+                .to(phones)
                 .build();
         try {
             smsRedisVistor.rpush(sms);
@@ -75,7 +75,7 @@ public class SmsAndMailLogic implements ISmsAndMailLogic {
 
         MailDto mailDto = MailDto.builder()
                 .content(mailContent)
-                .tos(mails)
+                .to(mails)
                 .subject(smsContent)
                 .build();
         try {

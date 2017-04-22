@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>com.minlingchao.falcon</artifactId>
+        <artifactId>open-falcon</artifactId>
         <groupId>open-falcon4j</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -12,7 +12,6 @@
     <artifactId>open-falcon4j-common</artifactId>
 
     <description>common entity util and so on</description>
-
 
 
     <!-- 分支 -->
@@ -72,6 +71,18 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
+        </dependency>
+
+        <!--commons-httpclient -->
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>${version.commons.httpclient}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.5</version>
         </dependency>
 
     </dependencies>

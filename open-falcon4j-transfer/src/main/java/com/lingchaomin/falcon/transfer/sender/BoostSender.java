@@ -31,7 +31,7 @@ public class BoostSender implements ApplicationListener {
     private Logger LOG= LoggerFactory.getLogger(BoostSender.class);
 
     @Autowired
-    private TransferConfig judgeConfig;
+    private TransferConfig transferConfig;
 
     private boolean isStart;
 
@@ -52,7 +52,7 @@ public class BoostSender implements ApplicationListener {
      * 初始化告警数据队列
      */
     private void initJudgeItemQueue(){
-        String clusters=judgeConfig.getCluster();
+        String clusters= transferConfig.getCluster();
 
         if(StringUtils.isBlank(clusters)){
             LOG.warn("judge cluster is null~~~~");
@@ -75,7 +75,7 @@ public class BoostSender implements ApplicationListener {
      */
     private void initJudgeNodeRings(){
 
-        String clusters=judgeConfig.getCluster();
+        String clusters= transferConfig.getCluster();
 
         Set<Node> nodes=keysOfNode(clusters);
 
