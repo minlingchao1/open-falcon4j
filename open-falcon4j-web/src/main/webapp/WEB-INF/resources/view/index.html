@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>运维管理平台</title>
+
+    <!-- 全局css -->
+    <link href="/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/minified/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/minified/core.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/minified/components.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/minified/colors.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/lib/jquery.min.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/app_new.js"></script>
+    <script src="/js/lib/router.js"></script>
+
+    <script src="/js/lib/x-editable.js"></script>
+    <script src="/js/lib/bootstrap-table.min.js"></script>
+    <script src="/js/lib/bootstrap-table-mobile.js"></script>
+    <script src="/js/jquery.json-2.4.min.js"></script>
+    <script src="/js/lib/blockui.min.js"></script>
+    <script src="/js/lib/bootbox.min.js"></script>
+    <script src="/js/lib/sweet_alert.min.js"></script>
+    <script src="/js/lib/select2.min.js"></script>
+    <script src="/js/lib/sockjs-1.1.1.min.js"></script>
+    <script src="/js/lib/nicescroll.min.js"></script>
+    <!--`-->
+    <script src="/js/lib/multi-websocket.js"></script>
+    <script src="/js/service/global_new.js"></script>
+    <script src="/js/index.js"></script>
+    #block("morescripts")
+    #end
+
+</head>
+<body class="navbar-top  has-detached-left">
+<div id="authCenter">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html"><img src="/images/logo_light.png" alt=""></a>
+
+            <ul class="nav navbar-nav pull-right visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+                <li><a class="sidebar-mobile-secondary-toggle"><i class="icon-more"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav">
+                <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+                <li>
+                    <a class="sidebar-control sidebar-detached-hide hidden-xs" data-popup="tooltip" title="Hide detached" data-placement="bottom" data-container="body">
+                        <i class="icon-drag-left"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="#">Text link</a></li>-->
+
+                <!--<li>-->
+                <!--<a href="#">-->
+                <!--<i class="icon-cog3"></i>-->
+                <!--<span class="visible-xs-inline-block position-right">Icon link</span>-->
+                <!--</a>-->
+                <!--</li>-->
+                <li class="dropdown dropdown-user">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <img class="figureUrl" src="/images/placeholder.jpg" alt="">
+                        <span class="userNick" ></span>
+                        <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="/logout"><i class="icon-switch2"></i>退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page container -->
+    <div class="page-container" style="min-height:375px">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-main">
+
+                    <div class="sidebar-content">
+                        <!-- User menu -->
+                        <div class="sidebar-user">
+                            <div class="category-content  dropdown dropdown-user">
+                                <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <div class="media">
+                                        <a href="#" class="media-left"><img src="/images/placeholder.jpg" class="figureUrl img-circle img-sm" alt=""></a>
+                                        <div class="media-body">
+                                            <span class="userNick" class="media-heading text-semibold"></span>
+                                            <!--<div class="text-size-mini text-muted">-->
+                                            <!--<i class="icon-user text-size-small"></i> &nbsp;超级管理员-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /user menu -->
+
+
+                        <!-- Main navigation -->
+                        <div class="sidebar-category sidebar-category-visible">
+                            <div class="category-content no-padding">
+                                <ul id="side-menu" class="navigation navigation-main navigation-accordion">
+                                    <li class="headerMenu"><a href="#"><i class="icon-stack"></i><span>运维监控配置</span></a>
+                                        <ul>
+                                            <li><a href="/monitor">监控配置</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="content-wrapper">
+                <!--<iframe id="ifr" scrolling="yes" frameborder="0" style="width:100%;min-height:200px;overflow:visible;background:#fff;" src="main"></iframe>-->
+                #block("content")
+                #end
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+

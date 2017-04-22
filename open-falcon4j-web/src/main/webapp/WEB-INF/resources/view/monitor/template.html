@@ -1,0 +1,157 @@
+#override("morescripts")
+<script src="/js/service/tpl.js"></script>
+#end
+
+#override("monitorContent")
+<div class="col-md-12" >
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">报警模版列表</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                </ul>
+            </div>
+            <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+        </div>
+
+        <div class="panel-body border-top-primary">
+
+            <div style="padding-bottom: 10px">
+                <button type="button" class="btn bg-teal" data-toggle="modal" data-target="#add-tpl">添加报警模版</button>
+            </div>
+
+
+            <table id="roleTable" data-toggle="table" data-id-field="id" data-mobile-responsive="true" data-editable-emptytext="Default empty text." data-editable-url="/user/modifyById">
+
+                <thead>
+                <tr>
+                    <th data-field="id" data-visible="false" data-align="center" data-editable="true">id</th>
+                    <th data-align="center" data-editable="false">模版名称</th>
+
+
+                    <th  data-align="center" data-editable="false">父模版名称</th>
+                    <th  data-align="center" data-editable="false">报警回调事件名称</th>
+                    <th  data-align="center" data-editable="false">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                #foreach($template in $templates)
+                <tr>
+                    <td class="text-right">$template.id</span></td>
+                    <td class="text-right">$template.tplName</span></td>
+                    #if($template.parentName)
+                    <td class="text-right">$template.parentName</td>
+                    #else
+                    <td class="text-right">--</td>
+                    #end
+                    <td class="text-right">$template.actionName</td>
+                    <td>
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a  tpl="$template.id" href="#" class="del"> <i class="icon-bin"></i>删除</a></li>
+                                    <li><a  tpl="$template.id" name="$template.tplName"  parentId="#if($template.parentId)$template.parentId #else 0 #end" action="$template.actionId"   href="#" class="modify"> <i class="icon-pen"></i>修改</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                #end
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div id="modify-tpl" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">修改报警模版</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">模版名</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="id">
+                            <input type="text" id="name" placeholder="模版名" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">父模版</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="parentId" placeholder="父模版" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调事件</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="actionId" placeholder="回调事件" >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmModifyTpl" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="add-tpl" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">添加报警模版</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">模版名</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-name" placeholder="模版名" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">父模版</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-parentId" placeholder="父模版" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调事件</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-actionId" placeholder="回调事件" >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmAddTpl" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+#end
+#extends("/monitor/monitor.html")

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <task:annotation-driven scheduler="scheduler"/>
+
+    <task:scheduler id="scheduler" pool-size="64"/>
+
+    <task:scheduled-tasks>
+
+        <!--同步策略-->
+        <task:scheduled ref="combineSmsAndMailTask" method="combineSms" cron="0/2 * * * * ?"/>
+
+
+        <!--同步策略-->
+        <task:scheduled ref="highEventAlarmTask" method="dealEvent" cron="0/2 * * * * ?"/>
+        <task:scheduled ref="lowEventAlarmTask" method="dealEvent" cron="0/2 * * * * ?"/>
+
+
+    </task:scheduled-tasks>
+</beans>

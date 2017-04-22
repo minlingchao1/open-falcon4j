@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lingchaomin.falcon.web.dao.ActionDao">
+
+    <sql id="table">action</sql>
+
+
+    <sql id="fileds">
+        id
+        ,gmt_create
+        ,gmt_modified
+        ,name
+        ,uic
+        ,user_grp_id
+        ,url
+        ,callback
+        ,before_call_back_sms
+        ,before_call_back_mail
+        ,after_call_back_sms
+        ,after_call_back_mail
+    </sql>
+
+    <resultMap id="actionRm" type="action">
+        <id property="id" column="id"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="name" column="name"/>
+        <result property="uic" column="uic"/>
+        <result property="url" column="url"/>
+        <result property="callback" column="callback"/>
+        <result property="beforeCallbackSms" column="before_call_back_sms"/>
+        <result property="beforeCallbackMail" column="before_call_back_mail"/>
+        <result property="afterCallbackSms" column="after_call_back_sms"/>
+        <result property="afterCallbackmail" column="after_call_back_mail"/>
+        <result property="userGrpId" column="user_grp_id"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="actionRm">
+        SELECT
+        <include refid="fileds"/>
+        FROM
+        <include refid="table"/>
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="actionRm">
+        SELECT
+        <include refid="fileds"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+
+
+    <insert id="insert" parameterType="action" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        <include refid="fileds"/>
+        )
+        VALUES
+        (null,#{gmtCreate},#{gmtModified},#{name},#{uic},#{userGrpId},#{url},#{callback},#{beforeCallbackSms},#{beforeCallbackMail},#{afterCallbackSms},#{afterCallbackmail})
+    </insert>
+
+    <update id="updateById" parameterType="action" >
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="uic!=null">uic=#{uic},</if>
+            <if test="userGrpId!=null">user_grp_id=#{userGrpId},</if>
+            <if test="url!=null">url=#{url},</if>
+            <if test="callback!=null">callback=#{callback},</if>
+            <if test="beforeCallbackSms!=null">before_call_back_sms=#{beforeCallbackSms},</if>
+            <if test="beforeCallbackMail!=null">before_call_back_mail=#{beforeCallbackMail},</if>
+            <if test="afterCallbackSms!=null">after_call_back_sms=#{afterCallbackSms},</if>
+            <if test="afterCallbackmail!=null">after_call_back_mail=#{afterCallbackmail}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lingchaomin.falcon.web.dao.StrategyDao">
+
+    <sql id="table">strategy</sql>
+
+
+    <sql id="fileds">
+        id
+        ,gmt_create
+        ,gmt_modified
+        ,metric
+        ,tag
+        ,func
+        ,operator
+        ,priority
+        ,note
+        ,right_value
+        ,max_step
+        ,tpl_id
+        ,action_id
+        ,end_point
+    </sql>
+
+    <resultMap id="strategyRm" type="strategy">
+        <id property="id" column="id"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="metric" column="metric"/>
+        <result property="tag" column="tag"/>
+        <result property="func" column="func"/>
+        <result property="operator" column="operator"/>
+        <result property="priority" column="priority"/>
+        <result property="note" column="note"/>
+        <result property="rightValue" column="right_value"/>
+        <result property="maxStep" column="max_step"/>
+        <result property="tplId" column="tpl_id"/>
+        <result property="actionId" column="action_id"/>
+        <result property="endPoint" column="end_point"/>
+        <result property="tplName" column="tpl_name"/>
+        <result property="actionName" column="action_name"/>
+    </resultMap>
+
+    <!--<resultMap id="strategyDtoRm" type="strategyDto">-->
+        <!--<id property="id" column="id"/>-->
+        <!--<result property="metric" column="metric"/>-->
+        <!--<result property="tag" column="tag"/>-->
+        <!--<result property="func" column="func"/>-->
+        <!--<result property="operator" column="operator"/>-->
+        <!--<result property="priority" column="priority"/>-->
+        <!--<result property="note" column="note"/>-->
+        <!--<result property="rightValue" column="right_value"/>-->
+        <!--<result property="maxStep" column="max_step"/>-->
+        <!--<result property="tplId" column="tpl_id"/>-->
+        <!--<result property="actionId" column="action_id"/>-->
+
+        <!--<result property="tplName" column="tpl_name"/>-->
+        <!--<result property="actionName" column="action_name"/>-->
+    <!--</resultMap>-->
+
+    <select id="selectAll" resultMap="strategyRm">
+        SELECT
+        e.*,t.tpl_name,a.name as action_name
+        FROM
+        strategy e
+        LEFT JOIN
+        template t
+        ON
+        e.tpl_id=t.id
+        LEFT JOIN
+        action a
+        ON
+        e.action_id=a.id
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="strategyRm">
+        SELECT
+        <include refid="fileds"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+
+
+    <insert id="insert" parameterType="strategy" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        <include refid="fileds"/>
+        )
+        VALUES
+        (null,#{gmtCreate},#{gmtModified},#{metric},#{tag},#{func},#{operator},#{priority},#{note},#{rightValue},#{maxStep},#{tplId},#{actionId},#{endPoint})
+    </insert>
+
+    <update id="updateById" parameterType="strategy" >
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="metric!=null">metric=#{metric},</if>
+            <if test="tag!=null">tag=#{tag},</if>
+            <if test="func!=null">func=#{func},</if>
+            <if test="operator!=null">operator=#{operator},</if>
+            <if test="priority!=null">priority=#{priority},</if>
+            <if test="note!=null">note=#{note},</if>
+            <if test="rightValue!=null">right_value=#{rightValue},</if>
+            <if test="maxStep!=null">max_step=#{maxStep},</if>
+            <if test="tplId!=null">tpl_id=#{tplId},</if>
+            <if test="actionId!=null">action_id=#{actionId},</if>
+            <if test="endPoint!=null">end_point=#{endPoint}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteById">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByTplId">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE tpl_id = #{id}
+    </delete>
+</mapper>

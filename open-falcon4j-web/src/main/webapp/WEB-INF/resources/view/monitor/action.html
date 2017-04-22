@@ -1,0 +1,295 @@
+#override("morescripts")
+<script src="/js/service/action.js"></script>
+#end
+
+#override("monitorContent")
+<div class="col-md-12" >
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">告警回调事件列表</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                </ul>
+            </div>
+            <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+        </div>
+
+        <div class="panel-body border-top-primary">
+
+            <div style="padding-bottom: 10px">
+                <button type="button" class="btn bg-teal" data-toggle="modal" data-target="#add-action">添加告警回调事件</button>
+            </div>
+
+
+            <table id="roleTable" data-toggle="table" data-id-field="id" data-mobile-responsive="true" data-editable-emptytext="Default empty text." data-editable-url="/user/modifyById">
+
+                <thead>
+                <tr>
+                    <th data-field="id" data-visible="false" data-align="center">id</th>
+                    <th data-align="center" data-editable="false">名称</th>
+                    <th  data-align="center" data-editable="false">发送告警对象</th>
+                    <th  data-align="center" data-editable="false">是否进行回调</th>
+                    <th  data-align="center" data-editable="false">回调之前发短信</th>
+                    <th  data-align="center" data-editable="false">回调之前发邮件</th>
+                    <th  data-align="center" data-editable="false">回调之后发短信</th>
+                    <th  data-align="center" data-editable="false">回调之后发邮件</th>
+                    <th  data-align="center" data-editable="false">回调地址</th>
+                    <th  data-align="center" data-editable="false">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                #foreach($action in $actions)
+                <tr>
+                    <td class="text-right">$action.id</span></td>
+                    <td class="text-right">$action.name</span></td>
+                    <td class="text-right">$action.uic</td>
+
+                    #if($action.callback)
+                    <td class="text-right">是</td>
+                    #else
+                    <td class="text-right">否</td>
+                    #end
+
+                    #if($action.beforeCallbackSms)
+                    <td class="text-right">是</td>
+                    #else
+                    <td class="text-right">否</td>
+                    #end
+
+                    #if($action.beforeCallbackMail)
+                    <td class="text-right">是</td>
+                    #else
+                    <td class="text-right">否</td>
+                    #end
+
+                    #if($action.afterCallbackSms)
+                    <td class="text-right">是</td>
+                    #else
+                    <td class="text-right">否</td>
+                    #end
+
+                    #if($action.afterCallbackmail)
+                    <td class="text-right">是</td>
+                    #else
+                    <td class="text-right">否</td>
+                    #end
+
+                    <td class="text-right">$action.url</td>
+                    <td>
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a  action="$action.id" href="#" class="del"> <i class="icon-bin"></i>删除</a></li>
+                                    <li><a  userGrpId="$action.userGrpId" action="$action.id" name="$action.name" url="$action.url" afterCallbackmail="$action.afterCallbackmail" afterCallbackSms="$action.afterCallbackSms" beforeCallbackMail="$action.beforeCallbackMail"  beforeCallbackSms="$action.beforeCallbackSms" callback="$action.callback"   href="#" class="modify"> <i class="icon-pen"></i>修改</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                #end
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div id="modify-action" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">修改告警回调事件</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调事件名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="id">
+                            <input type="text" id="name" placeholder="回调事件名称" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">发送用户组</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="userGrpId" placeholder="发送用户组" >
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">是否回调</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="callback">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调之前发短信</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="beforeCallbackSms">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调之前发邮件</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="beforeCallbackMail">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调之后发短信</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="afterCallbackSms">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调之后发邮件</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="afterCallbackmail">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调地址</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="url" placeholder="回调地址" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmModifyAction" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="add-action" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">添加告警回调事件</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调事件名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="id">
+                            <input type="text" id="add-name" placeholder="回调事件名称" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">发送用户组</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-userGrpId" placeholder="发送用户组">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">是否进行回调</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="add-callback">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">是否在回调之前发送短信</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="add-beforeCallbackSms">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">是否在回调之前发送邮件</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="add-beforeCallbackMail">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">是否在回调之后发送短信</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="add-afterCallbackSms">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">是否在回调之后发送邮件</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="add-afterCallbackmail">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">回调地址</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-url" placeholder="回调地址" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmAddAction" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+#end
+#extends("/monitor/monitor.html")

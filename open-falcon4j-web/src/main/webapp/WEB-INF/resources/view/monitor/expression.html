@@ -1,0 +1,273 @@
+#override("morescripts")
+<script src="/js/service/expression.js"></script>
+#end
+
+#override("monitorContent")
+<div class="col-md-12" >
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">全局策略列表</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                </ul>
+            </div>
+            <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+        </div>
+
+        <div class="panel-body border-top-primary">
+
+            <div style="padding-bottom: 10px">
+                <button type="button" class="btn bg-teal" data-toggle="modal" data-target="#add-expression">添加</button>
+            </div>
+
+
+            <table id="roleTable" data-toggle="table" data-id-field="id" data-mobile-responsive="true" data-editable-emptytext="Default empty text." data-editable-url="/user/modifyById">
+
+                <thead>
+                <tr>
+                    <th data-field="id" data-visible="false" data-align="center" data-editable="true">id</th>
+                    <th data-align="center" data-editable="false">表达式</th>
+                    <th  data-align="center" data-editable="false">报警条件</th>
+                    <th  data-align="center" data-editable="false">优先级</th>
+                    <th  data-align="center" data-editable="false">最大发送次数</th>
+                    <th  data-align="center" data-editable="false">报警接收组</th>
+                    <th  data-align="center" data-editable="false">备注</th>
+                    <th  data-align="center" data-editable="false">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                #foreach($expression in $expressions)
+                <tr>
+                    <td class="text-right">$expression.id</span></td>
+                    <td class="text-right">$expression.expression</span></td>
+                    <td class="text-right">$expression.func$expression.operator$expression.rightValue</td>
+                    <td class="text-right">$expression.priority</td>
+                    <td class="text-right">$expression.maxStep</td>
+                    <td class="text-right">$expression.actionName</td>
+
+                    #if($strategy.note)
+                    <td class="text-right">$strategy.note</td>
+                    #else
+                    <td class="text-right">--</td>
+                    #end
+                    <td>
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a  expression="$expression.id" href="#" class="del"> <i class="icon-bin"></i>删除</a></li>
+                                    <li><a  expression="$expression.id" expressionName="$expression.expression"
+                                            func="$expression.func" operator="$expression.operator" rightValue="$expression.rightValue"
+                                            priority="$expression.priority" maxStep="$expression.maxStep" actionId="$expression.actionId"
+                                            href="#" class="modify"> <i class="icon-pen"></i>修改</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                #end
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div id="modify-expression" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">修改全局策略信息</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">表达式</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="id">
+                            <input type="text" id="expression" placeholder="表达式" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">判断函数</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="func" placeholder="判断函数(格式:all(#3))" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">操作符</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="operator">
+                                <option value=">">></option>
+                                <option value="<"><</option>
+                                <option value=">=">>=</option>
+                                <option value="<="><=</option>
+                                <option value="==">==</option>
+                                <option value="=">=</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">阀值</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="rightValue" placeholder="阀值" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">优先级</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="priority">
+                                <option value="0">P0</option>
+                                <option value="0">P1</option>
+                                <option value="1">P1</option>
+                                <option value="2">P2</option>
+                                <option value="3">P3</option>
+                                <option value="4">P4</option>
+                                <option value="5">P5</option>
+                                <option value="6">P6</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">最大发送次数</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="maxStep" placeholder="最大发送次数" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">报警接收组</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="actionId" placeholder="报警接收组">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">备注</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="note" placeholder="备注" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmModifyExpression" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="add-expression" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">添加全局策略信息</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">表达式</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-expressionId" placeholder="表达式" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">判断函数</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-func" placeholder="判断函数(格式:all(#3))" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">操作符</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="add-operator">
+                                <option value=">">></option>
+                                <option value="<"><</option>
+                                <option value=">=">>=</option>
+                                <option value="<="><=</option>
+                                <option value="==">==</option>
+                                <option value="=">=</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">阀值</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-rightValue" placeholder="阀值" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">优先级</label>
+                        <div class="col-sm-9">
+                            <select class="select" id="add-priority">
+                                <option value="0">P0</option>
+                                <option value="0">P1</option>
+                                <option value="1">P1</option>
+                                <option value="2">P2</option>
+                                <option value="3">P3</option>
+                                <option value="4">P4</option>
+                                <option value="5">P5</option>
+                                <option value="6">P6</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">最大发送次数</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-maxStep" placeholder="最大发送次数" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">报警接收组</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-actionId" placeholder="报警接收组">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">备注</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-note" placeholder="备注" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmAddExpression" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+#end
+#extends("/monitor/monitor.html")

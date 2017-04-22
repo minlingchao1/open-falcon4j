@@ -23,7 +23,7 @@ public class PKUtil {
             return String.format("%s/%s",endPoint,metric);
         }
 
-        return String.format("%s/%s/%s",endPoint,metric,TagUtil.getTagMap(tags));
+        return String.format("%s/%s/%s",endPoint,metric,TagUtil.getTagString(tags));
     }
 
 }

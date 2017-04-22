@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lingchaomin.falcon.web.dao.GroupUserDao">
+
+    <sql id="table">group_user</sql>
+
+    <sql id="reftable">user_group_ref</sql>
+
+
+    <sql id="fileds">
+        id
+        ,gmt_create
+        ,gmt_modified
+        ,name
+        ,phone
+        ,email
+    </sql>
+
+    <resultMap id="groupUserRm" type="groupUser">
+        <id property="id" column="id"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="groupUserRm">
+        SELECT
+        <include refid="fileds"/>
+        FROM
+        <include refid="table"/>
+    </select>
+
+    <select id="selectByGrpId" parameterType="long" resultMap="groupUserRm">
+        SELECT
+        g.*
+        FROM
+        <include refid="table"/> g
+        LEFT JOIN
+        <include refid="reftable"/> ugr
+        ON
+        g.id=ugr.grp_user_id
+        WHERE
+        ugr.grp_id=#{userGrpId}
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="groupUserRm">
+        SELECT
+        <include refid="fileds"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+
+
+    <insert id="insert" parameterType="groupUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        <include refid="fileds"/>
+        )
+        VALUES
+        (null,#{gmtCreate},#{gmtModified},#{name},#{phone},#{email})
+    </insert>
+
+    <update id="updateById" parameterType="groupUser" >
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="email!=null">email=#{email}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteById">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </delete>
+</mapper>

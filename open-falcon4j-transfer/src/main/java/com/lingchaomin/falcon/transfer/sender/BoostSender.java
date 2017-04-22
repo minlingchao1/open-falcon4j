@@ -1,6 +1,7 @@
 package com.lingchaomin.falcon.transfer.sender;
 
-import com.lingchaomin.falcon.transfer.constant.JudgeConfig;
+import com.lingchaomin.falcon.common.util.hash.ConsistantHash;
+import com.lingchaomin.falcon.transfer.constant.TransferConfig;
 import com.lingchaomin.falcon.transfer.constant.NodeRings;
 import com.lingchaomin.falcon.transfer.constant.TransferQueueConfig;
 import com.lingchaomin.falcon.common.entity.JudgeItem;
@@ -30,7 +31,7 @@ public class BoostSender implements ApplicationListener {
     private Logger LOG= LoggerFactory.getLogger(BoostSender.class);
 
     @Autowired
-    private JudgeConfig judgeConfig;
+    private TransferConfig judgeConfig;
 
     private boolean isStart;
 
@@ -105,5 +106,27 @@ public class BoostSender implements ApplicationListener {
         }
 
         return nodes;
+    }
+
+
+    public static void main(String[] args) {
+        ConsistantHash judgeNoedeRing=new ConsistantHash();
+        Set<Node> nodes=new HashSet<Node>();
+
+        Node node1=new Node("dingdong07","10.12.13.14");
+        //Node node2=new Node("dingdong08","10.12.13.15");
+        Node node3=new Node("dingdong09","10.12.13.16");
+
+        nodes.add(node1);
+       // nodes.add(node2);
+        nodes.add(node3);
+
+        judgeNoedeRing.setNodeList(nodes);
+
+        judgeNoedeRing.buildHashCycle();;
+
+        Node node=judgeNoedeRing.findNodeByKey("dingdong07/cpu/project=falcon,module=judge");
+
+        System.out.println(node.toString());
     }
 }

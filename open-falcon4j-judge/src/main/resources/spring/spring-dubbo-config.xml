@@ -1,0 +1,37 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath*:*.properties"/>
+
+    <dubbo:application name="open-falcon4j-judge"/>
+
+    <dubbo:registry protocol="zookeeper" address="${dubbo.zookeeper.address}" client="zkclient"/>
+
+    <dubbo:protocol name="dubbo" port="20882"/>
+
+    <dubbo:annotation package="com.lingchaomin"/>
+
+
+    <!--接收告警判断数据-->
+    <dubbo:service interface="com.lingchaomin.falcon.common.api.IJudgeItemDubboApi"
+                   ref="judgeItemDubboApi"
+                   version="1.0.0"/>
+
+
+    <!--获取全局策略-->
+    <dubbo:reference id="expressionDubboApi"
+                     interface="com.lingchaomin.falcon.common.api.IExpressionDubboApi"
+                     version="1.0.0"
+                     check="false"/>
+
+
+    <!--获取host策略-->
+    <dubbo:reference id="strategyDubboApi"
+                     interface="com.lingchaomin.falcon.common.api.IStrategyDubboApi"
+                     version="1.0.0"
+                     check="false"/>
+
+</beans>

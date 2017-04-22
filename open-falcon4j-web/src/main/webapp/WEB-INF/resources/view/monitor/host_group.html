@@ -1,0 +1,203 @@
+#override("morescripts")
+<script src="/js/service/host_group.js"></script>
+#end
+
+#override("monitorContent")
+<div class="col-md-12" >
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">HostGroup列表</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                </ul>
+            </div>
+            <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+        </div>
+
+        <div class="panel-body border-top-primary">
+
+            <div style="padding-bottom: 10px">
+                <button type="button" class="btn bg-teal" data-toggle="modal" data-target="#add-hostGroup">添加</button>
+            </div>
+
+
+            <table id="roleTable" data-toggle="table" data-id-field="id" data-mobile-responsive="true" data-editable-emptytext="Default empty text." data-editable-url="/user/modifyById">
+
+                <thead>
+                <tr>
+                    <th data-field="id" data-visible="false" data-align="center" data-editable="true">id</th>
+                    <th data-align="center" data-editable="false">名称</th>
+                    <th data-align="center" data-editable="false">备注</th>
+                    <th data-align="center" data-editable="false">关联模版</th>
+                    <th data-align="center" data-editable="false">host列表</th>
+                    <th  data-align="center" data-editable="false">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                #foreach($hostGroup in $hostGroups)
+                <tr>
+                    <td class="text-right">$hostGroup.id</span></td>
+                    <td class="text-right">$hostGroup.grpName</span></td>
+
+                    #if($hostGroup.note)
+                    <td class="text-right">$hostGroup.note</span></td>
+                    #else
+                    <td class="text-right">--</span></td>
+                    #end
+
+                    #if($hostGroup.tplName)
+                    <td class="text-right">$hostGroup.tplName</span></td>
+                    #else
+                    <td class="text-right">--</span></td>
+                    #end
+
+                    #if($hostGroup.hostNames)
+                    <td class="text-right">$hostGroup.hostNames</span></td>
+                    #else
+                    <td class="text-right">--</span></td>
+                    #end
+
+
+
+                    <td>
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a  host="$hostGroup.id" href="#" class="del"> <i class="icon-bin"></i>删除</a></li>
+                                    <li><a  host="$hostGroup.id" name="$hostGroup.grpName"   href="#" class="modify"> <i class="icon-pen"></i>修改</a></li>
+                                    <li><a  host="$hostGroup.id" href="#" class="bindTpl"> <i class="icon-pen"></i>绑定模版</a></li>
+                                    <li><a  host="$hostGroup.id" href="#" class="bindHost"> <i class="icon-pen"></i>绑定Host</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                #end
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div id="modify-hostGroup" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">修改HostGroup信息</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">HostGroup名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="id">
+                            <input type="text" id="name" placeholder="HostGroup名称" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmModifyHostGroup" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="add-hostGroup" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">添加Host信息</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">HostGroup名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="userId">
+                            <input type="text" id="add-name" placeholder="HostGroup名称" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmAddHostGroup" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="bind-tpl" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">绑定模版</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">模版</label>
+                        <div class="col-lg-9">
+                            <input type="text" style="display: none" id="tplGrpId">
+                            <input type="text" id="tpl" placeholder="请选择模版">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmBindTpl" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="bind-host" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">绑定Host</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Host</label>
+                        <div class="col-lg-9">
+                            <input type="text" style="display: none" id="hostGrpId">
+                            <input type="text" id="hosts" placeholder="请选择Host">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmBindHost" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+#end
+#extends("/monitor/monitor.html")

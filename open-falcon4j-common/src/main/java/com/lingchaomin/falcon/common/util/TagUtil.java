@@ -20,7 +20,7 @@ public class TagUtil {
      * @param tags
      * @return
      */
-    public static final String getTagMap(String tags){
+    public static  String getTagString(String tags){
         if(StringUtils.isBlank(tags)){
             return null;
         }
@@ -39,5 +39,28 @@ public class TagUtil {
         }
 
         return StringUtils.join(ret,",");
+    }
+
+    /**
+     * 获取标签map
+     * @param tags
+     * @return
+     */
+    public static  Map<String,String> getTagMap(String tags){
+        if(StringUtils.isBlank(tags)){
+            return null;
+        }
+        Map<String,String> map=new HashMap<>();
+        String[] tagsArr=tags.split(",");
+
+        for(String tag:tagsArr){
+            String[] tkv=tag.split("=");
+            if(tkv.length!=2){
+                continue;
+            }
+            map.put(tkv[0].trim(),tkv[1].trim());
+        }
+
+        return map;
     }
 }

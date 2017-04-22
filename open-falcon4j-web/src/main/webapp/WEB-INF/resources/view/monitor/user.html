@@ -1,0 +1,150 @@
+#override("morescripts")
+<script src="/js/service/user.js"></script>
+#end
+
+#override("monitorContent")
+<div class="col-md-12" >
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">报警用户列表</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                </ul>
+            </div>
+            <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+        </div>
+
+        <div class="panel-body border-top-primary">
+
+            <div style="padding-bottom: 10px">
+                <button type="button" class="btn bg-teal" data-toggle="modal" data-target="#add-user">添加报警用户</button>
+            </div>
+
+
+            <table id="roleTable" data-toggle="table" data-id-field="id" data-mobile-responsive="true" data-editable-emptytext="Default empty text." data-editable-url="/user/modifyById">
+
+                <thead>
+                <tr>
+                    <th data-field="id" data-visible="false" data-align="center" data-editable="true">id</th>
+                    <th data-align="center" data-editable="false">用户名</th>
+                    <th  data-align="center" data-editable="false">手机号</th>
+                    <th  data-align="center" data-editable="false">邮箱</th>
+                    <th  data-align="center" data-editable="false">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                #foreach($user in $users)
+                <tr>
+                    <td class="text-right">$user.id</span></td>
+                    <td class="text-right">$user.name</span></td>
+                    <td class="text-right">$user.phone</td>
+                    <td class="text-right">$user.email</td>
+                    <td>
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a  user="$user.id" href="#" class="del"> <i class="icon-bin"></i>删除</a></li>
+                                    <li><a  user="$user.id" name="$user.name"  phone="$user.phone" email="$user.email"   href="#" class="modify"> <i class="icon-pen"></i>修改</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                #end
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div id="modify-user" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">修改报警用户信息</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">用户名</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="id">
+                            <input type="text" id="name" placeholder="用户名" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">手机号</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="phone" placeholder="手机号" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">邮箱</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="email" placeholder="邮箱" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmModifyUser" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="add-user" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h5 class="modal-title">添加报警用户信息</h5>
+            </div>
+
+            <form action="#" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">用户名</label>
+                        <div class="col-sm-9">
+                            <input type="text" style="display: none" id="userId">
+                            <input type="text" id="add-name" placeholder="用户名" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">手机号</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-phone" class="form-control" placeholder="手机号">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">邮箱</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="add-email" placeholder="邮箱" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                    <button id="confirmAddUser" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+#end
+#extends("/monitor/monitor.html")

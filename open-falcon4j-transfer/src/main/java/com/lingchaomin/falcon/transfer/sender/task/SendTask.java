@@ -1,8 +1,8 @@
 package com.lingchaomin.falcon.transfer.sender.task;
 
-import com.lingchaomin.falcon.transfer.constant.JudgeConfig;
+import com.lingchaomin.falcon.transfer.constant.TransferConfig;
 import com.lingchaomin.falcon.transfer.constant.TransferQueueConfig;
-import com.lingchaomin.falcon.common.api.IJudgeItemService;
+import com.lingchaomin.falcon.common.api.IJudgeItemDubboApi;
 import com.lingchaomin.falcon.common.dto.FalconOperResp;
 import com.lingchaomin.falcon.common.entity.JudgeItem;
 
@@ -28,10 +28,10 @@ public class SendTask {
     private static final Logger LOG=LoggerFactory.getLogger(SendTask.class);
 
     @Autowired
-    private JudgeConfig judgeConfig;
+    private TransferConfig judgeConfig;
 
     @Autowired
-    private IJudgeItemService judgeItemService;
+    private IJudgeItemDubboApi judgeItemService;
 
     /**
      * 发送到judge模块
@@ -85,4 +85,7 @@ public class SendTask {
         //todo 用于统计发送情况 便于监控 后期做
         FalconOperResp resp=judgeItemService.send(judgeItems);
     }
+
+
+
 }

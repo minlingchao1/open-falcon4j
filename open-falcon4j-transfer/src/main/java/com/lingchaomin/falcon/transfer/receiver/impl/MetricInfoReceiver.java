@@ -1,7 +1,7 @@
 package com.lingchaomin.falcon.transfer.receiver.impl;
 
 import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
-import com.lingchaomin.falcon.transfer.constant.JudgeConfig;
+import com.lingchaomin.falcon.transfer.constant.TransferConfig;
 import com.lingchaomin.falcon.transfer.constant.TransferRespError;
 import com.lingchaomin.falcon.transfer.dto.TransferResp;
 import com.lingchaomin.falcon.transfer.receiver.IMetricInfoReceiver;
@@ -21,7 +21,7 @@ import javax.ws.rs.QueryParam;
  * @author minlingchao
  * @version 1.0
  * @date 2017/4/20 下午9:17
- * @description
+ * @description 用于接收监控数据
  */
 @Component
 @Path("metric")
@@ -30,7 +30,7 @@ public class MetricInfoReceiver implements IMetricInfoReceiver{
 
 
     @Autowired
-    private JudgeConfig judgeConfig;
+    private TransferConfig judgeConfig;
 
     /**
      * 接收监控信息

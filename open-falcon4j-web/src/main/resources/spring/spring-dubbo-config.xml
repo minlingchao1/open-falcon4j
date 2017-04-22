@@ -1,0 +1,25 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath*:*.properties"/>
+
+    <dubbo:application name="open-falcon4j-web"/>
+
+    <dubbo:registry protocol="zookeeper" address="${dubbo.zookeeper.address}" client="zkclient"/>
+
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+
+    <!--全局策略-->
+    <dubbo:service interface="com.lingchaomin.falcon.web.dubbo.IExpressionDubboApi"
+                   ref="expressionDubboApi"/>
+
+    <!--host策略-->
+    <dubbo:service interface="com.lingchaomin.falcon.web.dubbo.IStrategyDubboApi"
+                   ref="strategyDubboApi"/>
+
+
+</beans>

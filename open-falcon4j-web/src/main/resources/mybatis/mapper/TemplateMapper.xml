@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lingchaomin.falcon.web.dao.TemplateDao">
+
+    <sql id="table">template</sql>
+
+
+    <sql id="fileds">
+        id
+        ,gmt_create
+        ,gmt_modified
+        ,tpl_name
+        ,parent_id
+        ,action_id
+    </sql>
+
+    <resultMap id="templateRm" type="template">
+        <id property="id" column="id"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="tplName" column="tpl_name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="actionId" column="action_id"/>
+    </resultMap>
+
+    <resultMap id="templateDtoRm" type="tplDto">
+        <id property="id" column="id"/>
+        <result property="tplName" column="tpl_name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="actionId" column="action_id"/>
+        <result property="actionName" column="action_name"/>
+        <result property="parentName" column="parent_name"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="templateDtoRm">
+        SELECT t.id,t.tpl_name,pt.id as parent_id,pt.tpl_name as parent_name,a.id as action_id,a.name as action_name
+        FROM
+        template t
+        LEFT JOIN
+        template pt
+        ON
+        t.parent_id=pt.id
+        LEFT JOIN
+        action a
+        ON
+        t.action_id=a.id
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="templateRm">
+        SELECT
+        <include refid="fileds"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+
+
+    <insert id="insert" parameterType="template" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        <include refid="fileds"/>
+        )
+        VALUES
+        (null,#{gmtCreate},#{gmtModified},#{tplName},#{parentId},#{actionId})
+    </insert>
+
+    <update id="updateById" parameterType="template" >
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="tplName!=null">tpl_name=#{tplName},</if>
+            <if test="parentId!=null">parent_id=#{parentId},</if>
+            <if test="actionId!=null">action_id=#{actionId}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="deleteById">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </delete>
+</mapper>

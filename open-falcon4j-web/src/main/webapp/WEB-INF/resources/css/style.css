@@ -1,0 +1,25 @@
+.datatable-scroll-wrap {
+    z-index: 10000;
+    overflow-x: inherit;
+}
+
+.toolbar {
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0 0 20px 20px;
+}
+
+.page-container{
+    min-height:671px
+}
+
+#upladDetail .modal-content{
+    z-index: -10;
+}
+
+.bg-dark {
+    background-color: #000000;
+    border-color: #000000;
+    color: #fff;
+}

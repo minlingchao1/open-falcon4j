@@ -1,0 +1,90 @@
+
+#override("content")
+<!-- Content area -->
+<div class="content">
+
+    <!-- Detached sidebar -->
+    <div class="sidebar-detached">
+        <div class="sidebar sidebar-secondary  sidebar-default">
+            <div class="sidebar-content">
+
+
+                <!-- Sub navigation -->
+                <div class="sidebar-category">
+                    <div class="category-title">
+                        <span>监控配置</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="category-content no-padding">
+                        <ul class="navigation navigation-alt navigation-accordion">
+                            <li class="navigation-header">操作</li>
+                            <li>
+                                <a href="#"><i class="icon-indent-decrease"></i> <span>报警用户配置</span></a>
+                                <ul>
+
+                                    <li><a href="/monitoruser/list">报警用户管理</a></li>
+                                    <li><a href="/usergroup/list">报警用户组管理</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-indent-decrease"></i> <span>告警回调事件配置</span></a>
+                                <ul>
+                                    <li><a href="/action/list">告警回调事件管理</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-indent-decrease"></i> <span>模版配置</span></a>
+                                <ul>
+                                    <li><a href="/tpl/list">模版配置</a></li>
+                                    <li><a href="/strategy/list">模版策略配置</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-indent-decrease"></i> <span>全局策略配置</span></a>
+                                <ul>
+
+                                    <li><a href="/expression/list">全局策略配置</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-indent-decrease"></i> <span>Host配置</span></a>
+                                <ul>
+
+                                    <li><a href="/host/list">Host管理</a></li>
+                                    <li><a href="/hostgroup/list">HostGroup管理</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sub navigation -->
+            </div>
+        </div>
+    </div>
+    <!-- /detached sidebar -->
+
+
+    <!-- Detached content -->
+    <div class="container-detached">
+        <div class="content-detached">
+            #block("monitorContent")
+            #end
+        </div>
+    </div>
+    <!-- /detached content -->
+</div>
+<!-- /content area -->
+
+#end
+
+
+
+#extends("index.html")

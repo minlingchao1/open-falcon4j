@@ -2,6 +2,7 @@ package com.lingchaomin.falcon.common.dto;
 
 import java.io.Serializable;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -11,6 +12,7 @@ import lombok.Data;
  * @description 操作返回结果
  */
 @Data
+@Builder
 public class FalconOperResp implements Serializable {
 
     /**

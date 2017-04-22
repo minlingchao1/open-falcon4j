@@ -1,5 +1,6 @@
 package com.lingchaomin.falcon.transfer.sender.impl;
 
+import com.lingchaomin.falcon.common.util.TagUtil;
 import com.lingchaomin.falcon.transfer.constant.NodeRings;
 import com.lingchaomin.falcon.transfer.constant.TransferQueueConfig;
 import com.lingchaomin.falcon.transfer.sender.IJudgeItemSender;
@@ -46,6 +47,7 @@ public class JudgeItemSender implements IJudgeItemSender {
                 .tag(metricValue.getTag())
                 .timestamp(metricValue.getTimestamp())
                 .value(Float.valueOf(metricValue.getValue()))
+                .tags(TagUtil.getTagMap(metricValue.getTag()))
                 .build();
 
         String key=node.getName()+":"+node.getIp();

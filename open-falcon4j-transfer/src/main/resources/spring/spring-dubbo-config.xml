@@ -22,7 +22,7 @@
 
 
     <dubbo:reference id="judgeItemService"
-                     interface="com.lingchaomin.falcon.common.api.IJudgeItemService"
+                     interface="com.lingchaomin.falcon.common.api.IJudgeItemDubboApi"
                      version="1.0.0"
                      check="false"/>
 
