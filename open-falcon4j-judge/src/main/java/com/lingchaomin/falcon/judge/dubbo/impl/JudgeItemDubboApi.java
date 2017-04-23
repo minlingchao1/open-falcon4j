@@ -29,7 +29,7 @@ public class JudgeItemDubboApi implements IJudgeItemDubboApi {
      * 发送告警信息
      */
     @Override
-    public FalconOperResp send(List<JudgeItem> judgeItemList) {
+    public FalconOperResp send(String hashKey,List<JudgeItem> judgeItemList) {
 
         for (JudgeItem judgeItem:judgeItemList){
             //放入到总队列中

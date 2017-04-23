@@ -24,7 +24,16 @@
     <dubbo:reference id="judgeItemService"
                      interface="com.lingchaomin.falcon.common.api.IJudgeItemDubboApi"
                      version="1.0.0"
-                     check="false"/>
+                     check="false">
+
+        <dubbo:method name="send"
+                      loadbalance="consistenthash">
+            <!--默认对第一个参数hash-->
+            <dubbo:parameter key="hash.arguments" value="0" />
+            <dubbo:parameter key="hash.nodes" value="160" />
+        </dubbo:method>
+
+    </dubbo:reference>
 
 
 </beans>

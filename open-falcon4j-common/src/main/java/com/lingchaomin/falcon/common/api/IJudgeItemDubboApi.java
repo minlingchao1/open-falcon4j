@@ -19,5 +19,5 @@ public interface IJudgeItemDubboApi {
      * @param judgeItemList
      * @return
      */
-    FalconOperResp send(List<JudgeItem> judgeItemList);
+    FalconOperResp send(String pk,List<JudgeItem> judgeItemList);
 }

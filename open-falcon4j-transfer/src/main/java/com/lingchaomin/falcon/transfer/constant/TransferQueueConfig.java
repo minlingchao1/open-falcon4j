@@ -4,6 +4,7 @@ import com.lingchaomin.falcon.common.entity.JudgeItem;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -14,5 +15,5 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class TransferQueueConfig {
 
-    public static Map<String,ConcurrentLinkedQueue<JudgeItem>> judgeQueues=new HashMap<>();
+    public static Map<String,ConcurrentLinkedQueue<JudgeItem>> judgeQueues=new ConcurrentHashMap<>();
 }

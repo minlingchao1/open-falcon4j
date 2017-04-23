@@ -82,13 +82,5 @@ public class MetricInfoReceiver implements IMetricInfoReceiver {
     }
 
 
-    public static void main(String[] args) throws IOException, HttpException {
-        String msg = "{\"timestamp\":\"1492393517\",\"metric\":\"LOAD_AVG\",\"endPoint\":\"dingdong07\",\"tag\":\"project=dingdong07\",\"value\":\"0.06\"}";
-
-        org.apache.commons.httpclient.NameValuePair[] data=new org.apache.commons.httpclient.NameValuePair[]{
-                new org.apache.commons.httpclient.NameValuePair("msg",msg)
-        };
-        WebUtil.doPost("http://localhost:8081/metric/receive",data,"utf-8" );
-    }
 
 }

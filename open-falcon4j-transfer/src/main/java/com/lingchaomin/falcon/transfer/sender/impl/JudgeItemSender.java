@@ -32,16 +32,8 @@ public class JudgeItemSender implements IJudgeItemSender {
     @Override
     public void push2JudgeSendQueue(MetricValue metricValue) {
 
-        String pk = PKUtil.pk(metricValue.getEndPoint(), metricValue.getMetric(), metricValue.getTag());
-
-        Node node = NodeRings.judgeNoedeRing.findNodeByKey(pk);
-
-        if (node == null) {
-            LOG.warn("no server node find");
-            return;
-        }
-
         JudgeItem judgeItem=JudgeItem.builder()
+                .id(JudgeItem.genId(metricValue.getEndPoint(),metricValue.getMetric(),metricValue.getTag()))
                 .endPoint(metricValue.getEndPoint())
                 .metric(metricValue.getMetric())
                 .tag(metricValue.getTag())
@@ -50,8 +42,16 @@ public class JudgeItemSender implements IJudgeItemSender {
                 .tags(TagUtil.getTagMap(metricValue.getTag()))
                 .build();
 
-        String key=node.getName()+":"+node.getIp();
+        String key=judgeItem.getId();
         ConcurrentLinkedQueue<JudgeItem> judgeItems= TransferQueueConfig.judgeQueues.get(key);
-        judgeItems.offer(judgeItem);
+
+        if(judgeItems==null){
+            judgeItems=new ConcurrentLinkedQueue<>();
+            judgeItems.add(judgeItem);
+            TransferQueueConfig.judgeQueues.put(key,judgeItems);
+        }else {
+            judgeItems.offer(judgeItem);
+        }
+
     }
 }

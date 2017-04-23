@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -38,24 +39,17 @@ public class SendTask {
      */
     public void send2Judge(){
 
-        String clusters= transferConfig.getCluster();
+        Set<String> keys=TransferQueueConfig.judgeQueues.keySet();
 
-        if(StringUtils.isBlank(clusters)){
-            LOG.warn("judge clusters is null~~~~");
-            return;
-        }
-
-        String[] clustersArr=clusters.split(",");
-
-        for(String c:clustersArr){
-            ConcurrentLinkedQueue<JudgeItem> judgeItemQueue= TransferQueueConfig.judgeQueues.get(c);
+        for(String key:keys){
+            ConcurrentLinkedQueue<JudgeItem> judgeItemQueue= TransferQueueConfig.judgeQueues.get(key);
 
             if(judgeItemQueue.isEmpty()){
-                LOG.warn("judge queue key:{} is empty",c);
+                LOG.warn("judge queue key:{} is empty",key);
                 continue;
             }
 
-            forward2JudgeTask(judgeItemQueue,c.split(":")[1]);
+            forward2JudgeTask(judgeItemQueue,key);
         }
 
     }
@@ -63,9 +57,9 @@ public class SendTask {
     /**
      * 处理queue
      * @param judgeItemQueue
-     * @param ip
+     * @param key
      */
-    private void forward2JudgeTask(ConcurrentLinkedQueue<JudgeItem> judgeItemQueue,String ip){
+    private void forward2JudgeTask(ConcurrentLinkedQueue<JudgeItem> judgeItemQueue,String key){
 
         //每批最大发送量
         int batch= transferConfig.getBatch();
@@ -83,9 +77,6 @@ public class SendTask {
         }
 
         //todo 用于统计发送情况 便于监控 后期做
-        FalconOperResp resp=judgeItemService.send(judgeItems);
+        FalconOperResp resp=judgeItemService.send(key,judgeItems);
     }
-
-
-
 }

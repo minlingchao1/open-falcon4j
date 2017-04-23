@@ -12,7 +12,7 @@
     <task:scheduled-tasks>
 
         <!--同步策略-->
-        <task:scheduled ref="sendTask" method="send2Judge" cron="0/2 * * * * ?"/>
+        <task:scheduled ref="sendTask" method="send2Judge" cron="0/30 * * * * ?"/>
 
 
     </task:scheduled-tasks>
