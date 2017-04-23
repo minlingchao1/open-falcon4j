@@ -154,23 +154,23 @@ public class SmsAndMailLogic implements ISmsAndMailLogic {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("P");
+        sb.append("优先级");
         sb.append("[" + event.getPriority() + "]");
-        sb.append("S");
+        sb.append("状态");
         sb.append("[" + event.getStatus() + "]");
-        sb.append("E");
+        sb.append("服务器");
         sb.append("[" + event.getEndPoint() + "]");
-        sb.append("N");
-        sb.append("[" + event.getNote() + "]");
-        sb.append("F");
+        sb.append("指标");
+        sb.append("[" + event.getMetric() + "]");
+        sb.append("判断函数");
         sb.append("[" + event.getFunc() + "]");
-        sb.append("T");
+        sb.append("标签");
         sb.append("[" + event.getPushedTags() + "]");
-        sb.append("L");
+        sb.append("当前值");
         sb.append("[" + event.getLeftValue() + "]");
-        sb.append("R");
+        sb.append("阀值");
         sb.append("[" + event.getRightValue() + "]");
-        sb.append("T");
+        sb.append("时间");
         sb.append(DateUtil.formDateForYMDHMS(event.getEventTime()));
         return sb.toString();
     }

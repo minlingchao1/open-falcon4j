@@ -10,16 +10,18 @@
 
     <dubbo:registry protocol="zookeeper" address="${dubbo.zookeeper.address}" client="zkclient"/>
 
-    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
 
 
     <!--全局策略-->
-    <dubbo:service interface="com.lingchaomin.falcon.web.dubbo.IExpressionDubboApi"
-                   ref="expressionDubboApi"/>
+    <dubbo:service interface="com.lingchaomin.falcon.common.api.IExpressionDubboApi"
+                   ref="expressionDubboApi"
+                   version="1.0.0"/>
 
     <!--host策略-->
-    <dubbo:service interface="com.lingchaomin.falcon.web.dubbo.IStrategyDubboApi"
-                   ref="strategyDubboApi"/>
+    <dubbo:service interface="com.lingchaomin.falcon.common.api.IStrategyDubboApi"
+                   ref="strategyDubboApi"
+                   version="1.0.0"/>
 
 
 </beans>

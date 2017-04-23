@@ -166,7 +166,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>${version.plugin.tomcat7.maven}</version>
                 <configuration>
-                    <port>8081</port>
+                    <port>8082</port>
                     <path>/</path>
                 </configuration>
             </plugin>

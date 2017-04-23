@@ -26,6 +26,9 @@ public class LowEventAlarmTask {
     @Autowired
     private IAlarmService alarmService;
 
+    @Autowired
+    private AlarmConfig alarmConfig;
+
     public static final Integer LIMIT=500;
 
     /**
@@ -33,7 +36,9 @@ public class LowEventAlarmTask {
      */
     public void dealEvent(){
 
-        List<String> result=eventRedisVistor.brpop(1, AlarmConfig.LOW_QUEUE);
+        String[] lowQueues=alarmConfig.getLowQueue().split(",");
+
+        List<String> result=eventRedisVistor.brpop(1, lowQueues);
 
         if(CollectionUtils.isEmpty(result)){
             return;

@@ -9,16 +9,16 @@
 
     <task:scheduler id="scheduler" pool-size="64"/>
 
-    <!--<task:scheduled-tasks>-->
+    <task:scheduled-tasks>
 
         <!--同步策略-->
-        <!--<task:scheduled ref="cleanOldJudgeItemMap" method="clean" cron="0/2 * * * * ?"/>-->
+        <task:scheduled ref="cleanOldJudgeItemMap" method="clean" cron="0/2 * * * * ?"/>
 
 
         <!--同步策略-->
-        <!--<task:scheduled ref="syncStrategies" method="syncStrategies" cron="0/2 * * * * ?"/>-->
-        <!--<task:scheduled ref="syncStrategies" method="syncExpressions" cron="0/2 * * * * ?"/>-->
+        <task:scheduled ref="syncStrategies" method="syncStrategies" cron="0/2 * * * * ?"/>
+        <task:scheduled ref="syncStrategies" method="syncExpressions" cron="0/2 * * * * ?"/>
 
 
-    <!--</task:scheduled-tasks>-->
+    </task:scheduled-tasks>
 </beans>

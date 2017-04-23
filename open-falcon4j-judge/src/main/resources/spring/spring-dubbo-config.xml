@@ -10,7 +10,7 @@
 
     <dubbo:registry protocol="zookeeper" address="${dubbo.zookeeper.address}" client="zkclient"/>
 
-    <dubbo:protocol name="dubbo" port="20882"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
 
     <dubbo:annotation package="com.lingchaomin"/>
 
@@ -24,14 +24,12 @@
     <!--获取全局策略-->
     <dubbo:reference id="expressionDubboApi"
                      interface="com.lingchaomin.falcon.common.api.IExpressionDubboApi"
-                     version="1.0.0"
-                     check="false"/>
+                     version="1.0.0"/>
 
 
     <!--获取host策略-->
     <dubbo:reference id="strategyDubboApi"
                      interface="com.lingchaomin.falcon.common.api.IStrategyDubboApi"
-                     version="1.0.0"
-                     check="false"/>
+                     version="1.0.0"/>
 
 </beans>

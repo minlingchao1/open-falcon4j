@@ -28,6 +28,9 @@ public class HighEventAlarmTask {
     @Autowired
     private IAlarmService alarmService;
 
+    @Autowired
+    private AlarmConfig alarmConfig;
+
     public static final Integer LIMIT=500;
 
     /**
@@ -35,7 +38,8 @@ public class HighEventAlarmTask {
      */
     public void dealEvent(){
 
-        List<String> result=eventRedisVistor.brpop(1, AlarmConfig.HIGH_QUEUE);
+        String[] highQueues=alarmConfig.getHighQueue().split(",");
+        List<String> result=eventRedisVistor.brpop(1, highQueues);
 
         if(CollectionUtils.isEmpty(result)){
             return;
