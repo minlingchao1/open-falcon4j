@@ -4,10 +4,13 @@ import com.lingchaomin.falcon.common.api.IJudgeItemDubboApi;
 import com.lingchaomin.falcon.common.dto.FalconOperResp;
 import com.lingchaomin.falcon.common.entity.JudgeItem;
 import com.lingchaomin.falcon.judge.constant.CheckIsJudgeProperty;
+import com.lingchaomin.falcon.judge.constant.JudgeConfig;
 import com.lingchaomin.falcon.judge.his.JudgeItemQueue;
 import com.lingchaomin.falcon.judge.his.JudgeItemStore;
 import com.lingchaomin.falcon.judge.service.IJudgeService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +26,23 @@ import java.util.List;
 @Service
 public class JudgeItemDubboApi implements IJudgeItemDubboApi {
 
+    private static final Logger LOG= LoggerFactory.getLogger(JudgeItemDubboApi.class);
+
     @Autowired
     private IJudgeService judgeService;
+
+    @Autowired
+    private JudgeConfig judgeConfig;
     /**
      * 发送告警信息
      */
     @Override
     public FalconOperResp send(String hashKey,List<JudgeItem> judgeItemList) {
+
+        if(judgeConfig.isEnabled()){
+            LOG.warn("judge is disabled");
+            return FalconOperResp.fail("judge is disabled");
+        }
 
         for (JudgeItem judgeItem:judgeItemList){
             //放入到总队列中
@@ -41,12 +54,7 @@ public class JudgeItemDubboApi implements IJudgeItemDubboApi {
             }
         }
 
-        FalconOperResp falconOperResp=FalconOperResp.builder()
-                .msg("success")
-                .isSuccess(true)
-                .build();
-
-        return falconOperResp;
+        return FalconOperResp.success();
     }
 
     /**

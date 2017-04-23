@@ -31,17 +31,7 @@ public class CacheConfig {
     public static Cache<String,Map<String,List<Expression>>> expressionMetricCache=CacheBuilder.newBuilder().expireAfterAccess(5,TimeUnit.MINUTES).build();
 
 
-    public static final String CACHE_TEMPLTE = "CACHE_TEMPLATE";
-
-    public static final String CACHE_STRATEGY = "CACHE_STRATEGY";
-
-    public static final String CACHE_HOST = "CACHE_HOST";
-
-    public static final String CACHE_HOST_STRAS = "CACHE_HOST_STRAS";
-
     public static final String CACHE_HOST_METRIC_STRAS = "CACHE_HOST_METRIC_STRAS";
-
-    public static final String CACHE_EXPRESSION="CACHE_EXPRESSION";
 
     public static final String CACHE_EXPRESSION_METRIC="CACHE_EXPRESSION_METRIC";
 

@@ -42,7 +42,7 @@ public class ParseFuncLogic implements IParseFuncLogic {
         int idx = func.indexOf(POUND);
 
         //限制次数
-        int limit = Integer.valueOf(func.substring(func.indexOf(POUND) + 1, func.indexOf(POUND) + 2));
+        int limit = Integer.valueOf(func.substring(idx + 1, idx + 2));
 
         //函数名
         String funcName = func.substring(0, func.indexOf(POUND) - 1);
@@ -377,9 +377,4 @@ public class ParseFuncLogic implements IParseFuncLogic {
         }
         return isTriggered;
     }
-
-    private String genJudgeItemKey(String endPoint, String metric) {
-        return endPoint + ":" + metric;
-    }
-
 }

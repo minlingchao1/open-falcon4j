@@ -11,8 +11,14 @@ import lombok.Data;
 @Data
 public class JudgeConfig {
 
+    /**
+     * 是否开启告警判断
+     */
     private boolean enabled;
 
+    /**
+     * 最小发送间隔
+     */
     private Integer minInterval;
 
 }

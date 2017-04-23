@@ -1,13 +1,10 @@
 package com.lingchaomin.falcon.transfer.sender.impl;
 
 import com.lingchaomin.falcon.common.util.TagUtil;
-import com.lingchaomin.falcon.transfer.constant.NodeRings;
 import com.lingchaomin.falcon.transfer.constant.TransferQueueConfig;
 import com.lingchaomin.falcon.transfer.sender.IJudgeItemSender;
 import com.lingchaomin.falcon.common.entity.JudgeItem;
 import com.lingchaomin.falcon.common.entity.MetricValue;
-import com.lingchaomin.falcon.common.util.PKUtil;
-import com.lingchaomin.falcon.common.util.hash.Node;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

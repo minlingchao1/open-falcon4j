@@ -24,4 +24,23 @@ public class FalconOperResp implements Serializable {
      * 是否成功
      */
     private Boolean isSuccess;
+
+    public static FalconOperResp success(){
+
+        FalconOperResp falconOperResp=FalconOperResp.builder()
+                .msg("success")
+                .isSuccess(true)
+                .build();
+
+        return falconOperResp;
+    }
+
+    public static FalconOperResp fail(String msg){
+        FalconOperResp falconOperResp=FalconOperResp.builder()
+                .msg(msg)
+                .isSuccess(false)
+                .build();
+
+        return falconOperResp;
+    }
 }
